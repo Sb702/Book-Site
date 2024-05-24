@@ -1,35 +1,44 @@
 import { useState } from "react";
 
-export default function Login({ setIsLoggedIn, setCreateUser, createUser}) {
+export default function Login({
+  setIsLoggedIn,
+  setCreateUser,
+  createUser,
+  setUser,
+}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin(e) {
-    e.preventDefault();
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
+function handleLogin(e) {
+  e.preventDefault();
+  fetch("http://localhost:3000/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      email,
+      password,
+    }),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (data && !data.error) {
+        setIsLoggedIn(true);
+        setUser(data);
+      } else {
+        console.error(data.error);
+      }
     })
-      .then((res) => res.text())
-      .then((data) => {
-        console.log(data);
-        if (data === "User logged in successfully") {
-          setIsLoggedIn(true);
-        }
-      });
-  }
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
   function handleSetCreateUser() {
     setCreateUser(!createUser);
   }
 
-  
   return (
     <div>
       <h1>Welcome to Bookly! Sign in below</h1>
@@ -46,9 +55,7 @@ export default function Login({ setIsLoggedIn, setCreateUser, createUser}) {
         />
         <button type="submit">Sign In</button>
       </form>
-      <button onClick={handleSetCreateUser} >
-        Create Account 
-        </button>
+      <button onClick={handleSetCreateUser}>Create Account</button>
     </div>
   );
 }

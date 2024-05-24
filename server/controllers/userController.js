@@ -28,14 +28,14 @@ exports.register = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
-      return res.send("User not found");
+      return res.status.json({ error: "User not found" });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      return res.send("Incorrect password");
+        return res.status(400).json({ error: "Invalid credentials" });
     }
 
-    res.send("User logged in successfully");
+    res.status(200).send(user);
   }
