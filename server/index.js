@@ -4,9 +4,11 @@ const port = 3000;
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const routes = require("./routes/routes");
+const cors = require("cors");
 
 
 dotenv.config();
+app.use(cors());
 app.use(express.json());
 
 
@@ -23,7 +25,6 @@ mongoose
   });
 
 app.use("/", routes);
-app.use("/register", routes);
 
 
 app.listen(port, () => {
