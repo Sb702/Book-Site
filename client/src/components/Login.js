@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function Login() {
+export default function Login({ setIsLoggedIn, setCreateUser, createUser}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,7 +19,14 @@ export default function Login() {
       .then((res) => res.text())
       .then((data) => {
         console.log(data);
+        if (data === "User logged in successfully") {
+          setIsLoggedIn(true);
+        }
       });
+  }
+
+  function handleSetCreateUser() {
+    setCreateUser(!createUser);
   }
 
   
@@ -39,6 +46,9 @@ export default function Login() {
         />
         <button type="submit">Sign In</button>
       </form>
+      <button onClick={handleSetCreateUser} >
+        Create Account 
+        </button>
     </div>
   );
 }
