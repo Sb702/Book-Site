@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import './UserBookRender.css'
 
 export default function UserBookRender({ user }) {
   const [userBooks, setUserBooks] = useState([]);
@@ -13,14 +14,15 @@ export default function UserBookRender({ user }) {
 
   return <div>
     <h1>Your Books:</h1>
-  {/* userbooks is an array of objects where inside the book is at userbooks[i].book.volumeInfo */}
+
+  <div className="book-outer-wrap">
     {userBooks.map((book) => {
-      return <div key={book._id}>
+      return <div key={book._id} className="book-wrap">
         <h3>{book.book.volumeInfo.title}</h3>
         <img src={book.book.volumeInfo.imageLinks.thumbnail} alt={book.book.volumeInfo.title} />
         <p>{book.book.volumeInfo.authors}</p>
-        <p>{book.book.volumeInfo.description}</p>
       </div>;
     })}
+    </div>
   </div>;
 }
