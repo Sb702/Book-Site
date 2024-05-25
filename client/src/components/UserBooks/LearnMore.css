@@ -1,5 +1,44 @@
 .learnmore-container {
     position: absolute;
-    height: 20vh;
-    background-color: grey;
+    height: 70vh;
+    width: 70vw;
+    background-color: var(--primary-color);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5%;
+    border-radius: 5%;
+    box-shadow: 0px 2px 8px black;
+    overflow: scroll;
+}
+
+.book-title {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: left;
+    gap: 2%;
+}
+
+.pop-disc {
+    text-align: left;
+}
+
+.book-secondary-info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 2%;
+}
+
+.close-btn-pop {
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    background-color: rgb(211, 211, 211);
+    border: none;
+    border-radius: 50%;
+    padding: 1%;
+    cursor: pointer;
+    font-size: larger;
 }

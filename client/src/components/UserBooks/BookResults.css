@@ -1,11 +1,70 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --hover-color: #8a2be2;
+    --active-color: #4b0082;
+}
+
 .book-outer-container {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-auto-rows: 1fr;
+    gap: 1%;
+    padding: 1%;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+    color: white;
+    text-shadow: 0 0 5px black;
 }
 
 .book-container {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    justify-content: center;
+    align-items: center;
     overflow: auto;
     padding: 3%;
     text-align: center;
+    border-radius: 2%; 
+    background-color: var(--primary-color);
+    box-shadow: 0px 4px 6px 0px hsla(0, 0%, 0%, 0.2);
+}
+
+.title-container-book {
+    /* height: 25%; */
+}
+
+.main-book-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 1rem;
+}
+
+.main-book-btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.book-btn {
+    padding: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+}
+
+.book-btn:hover {
+    background-color: var(--hover-color);
+    transform: scale(1.05);
 }

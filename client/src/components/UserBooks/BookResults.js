@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import LearnMore from "./LearnMore";
 import "./BookResults.css";
 
-export default function BookResults({ books, user }) {
+export default function BookResults({ books, user, setAddBook, addBook}) {
   const [learnMore, setLearnMore] = useState(false);
   const [selectedBook, setSelectedBook] = useState(null);
 
@@ -23,7 +23,7 @@ export default function BookResults({ books, user }) {
     })
       .then((res) => res.text())
       .then((data) => console.log(data))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err), setAddBook(!addBook), console.log('addBook:', addBook) );
   }
 
   return (
@@ -32,17 +32,23 @@ export default function BookResults({ books, user }) {
         books.map((book) => {
           const thumbnail = book.volumeInfo.imageLinks?.thumbnail || "";
           return (
+            // Book Container
             <div key={book.id} className="book-container">
-              <button onClick={() => handleSaveBook(book)}>quick add</button>
+              <div className="title-container-book">
               <h2>{book.volumeInfo.title}</h2>
               <h3>{book.volumeInfo.authors}</h3>
-              <img src={thumbnail} alt={book.volumeInfo.title} />
-              <button onClick={() => handleLearnMore(book.id)}>
+              </div>
+              <img className="main-book-img" src={thumbnail} alt={book.volumeInfo.title} />
+              {/* Main Book Buttons */}
+              <div className="main-book-btns">
+              <button className="book-btn" onClick={() => handleLearnMore(book.id)}>
                 Learn More
               </button>
               {selectedBook === book.id && learnMore ? (
-                <LearnMore book={book.volumeInfo} />
+                <LearnMore book={book.volumeInfo} setLearnMore={setLearnMore} />
               ) : null}
+              <button className="book-btn" onClick={() => handleSaveBook(book)}>quick add</button>
+            </div>
             </div>
           );
         })}
