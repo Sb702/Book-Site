@@ -21,3 +21,9 @@ exports.save = async (req, res) => {
   await bookm.save();
   res.status(201).send("Book saved!");
 };
+
+exports.delete = async (req, res) => {
+  const { id } = req.params;
+  await BookModel.findByIdAndDelete(id);
+  res.status(200).json({ message: "Book deleted!" });
+};

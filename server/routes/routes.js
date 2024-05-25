@@ -10,6 +10,7 @@ router.post("test", userController.test);
 
 router.post("/search", bookController.search);
 router.post("/save", bookController.save);
+router.delete("/delete/:id", bookController.delete);
 
 router.get("/books/:id", userbookController.getBooks);
 

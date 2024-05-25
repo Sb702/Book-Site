@@ -45,3 +45,17 @@
     box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.531);
     transform: translateY(2px);
 }
+
+/* Animation for transition to separate page */
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.login-form.fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards;
+}

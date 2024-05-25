@@ -10,6 +10,7 @@ export default function Login({
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const navigate = useNavigate();
 
@@ -30,6 +31,7 @@ function handleLogin(e) {
       if (data && !data.error) {
         navigate("/home");
         setUser(data);
+        setLoginSuccess(true);
       } else {
         console.error(data.error);
       }
@@ -44,7 +46,7 @@ function handleLogin(e) {
   }
 
   return (
-    <div className="login-wrap">
+    <div className={loginSuccess ? "login-form.fade-out login-wrap" : "login-wrap"}>
       <div className="wrap">
       <h1>Welcome to Bookly! Sign in below</h1>
       <p>Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
