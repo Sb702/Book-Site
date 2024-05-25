@@ -16,8 +16,8 @@ exports.search = async (req, res) => {
 };
 
 exports.save = async (req, res) => {
-  const { title, authors, description, userID } = req.body;
-  const book = new BookModel({ title, authors, description, userID });
-  await book.save();
+  const { book, userID } = req.body;
+  const bookm = new BookModel({ userID: userID, book: book });
+  await bookm.save();
   res.status(201).send("Book saved!");
 };

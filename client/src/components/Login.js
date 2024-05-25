@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CreateUser from "./CreateUser";
 
 export default function Login({
   setCreateUser,
@@ -58,6 +59,7 @@ function handleLogin(e) {
         <button type="submit">Sign In</button>
       </form>
       <button onClick={handleSetCreateUser}>Create Account</button>
+      {createUser ? <CreateUser /> : null}
     </div>
   );
 }

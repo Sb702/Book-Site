@@ -4,7 +4,6 @@ import "./BookResults.css";
 export default function BookResults({ books, user }) {
   const [showFullDescription, setShowFullDescription] = useState({});
 
-
   const toggleDescription = (id) => {
     setShowFullDescription((prevState) => ({
       ...prevState,
@@ -12,26 +11,20 @@ export default function BookResults({ books, user }) {
     }));
   };
 
-  function handleSaveBook(e) {
-    // Select the right book to save
-    const book = e.target.parentElement;
-    const title = book.querySelector("h2").innerText;
-    const authors = book.querySelector("h3").innerText;
-    const description = book.querySelector("p").innerText;
-    const userID = user._id;
-
     // Send a POST request to the server
-    fetch("http://localhost:3000/save", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ title, authors, description, userID }),
-    })
-      .then((res) => res.text())
-      .then((data) => console.log(data))
-      .catch((err) => console.error(err));
-  }
+    function handleSaveBook(book) {
+      fetch("http://localhost:3000/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // body: JSON.stringify(book, userID: user._id),
+        body: JSON.stringify({ book, userID: user._id }),
+      })
+        .then((res) => res.text())
+        .then((data) => console.log(data))
+        .catch((err) => console.error(err));
+    }
 
   return (
     <div className="book-outer-container">
@@ -42,7 +35,7 @@ export default function BookResults({ books, user }) {
           const thumbnail = book.volumeInfo.imageLinks?.thumbnail || "";
           return (
             <div key={book.id} className="book-container">
-              <button onClick={handleSaveBook}>quick add</button>
+              <button onClick={() => handleSaveBook(book)}>quick add</button>
               <h2>{book.volumeInfo.title}</h2>
               <h3>{book.volumeInfo.authors}</h3>
               <img src={thumbnail} alt={book.volumeInfo.title} />
