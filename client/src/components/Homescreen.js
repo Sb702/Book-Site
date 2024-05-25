@@ -7,7 +7,7 @@ export default function Homescreen({ user }) {
     <div>
       <h1>Welcome to Bookly, {user.userName}!</h1>
       {/* <ChatContainer /> */}
-      <BookContainer />
+      <BookContainer user={user} />
     </div>
   )
 }

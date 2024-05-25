@@ -1,0 +1,11 @@
+.book-outer-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: 1fr;
+}
+
+.book-container {
+    overflow: auto;
+    padding: 3%;
+    text-align: center;
+}

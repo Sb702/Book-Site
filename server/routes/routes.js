@@ -8,6 +8,7 @@ router.post("/login", userController.login);
 router.post("test", userController.test);
 
 router.post("/search", bookController.search);
+router.post("/save", bookController.save);
 
 
 module.exports = router;
