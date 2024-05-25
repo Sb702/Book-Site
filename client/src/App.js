@@ -1,6 +1,7 @@
 import './App.css';
 import CreateUser from './components/CreateUser';
 import Login from './components/Login';
+import Homescreen from './components/Homescreen';
 import { useState } from "react";
 
 function App() {
@@ -22,7 +23,7 @@ function App() {
           )}
         </div>
       ) : (
-        <h1>Welcome to Bookly!</h1>
+        <Homescreen user={user}/>
       )}
     </div>
   );
