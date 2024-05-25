@@ -11,6 +11,8 @@ exports.search = async (req, res) => {
       key: process.env.GOOGLE_BOOKS_API_KEY,
     },
   });
+
+  res.status(200).send(books.data);
 };
 
 exports.save = async (req, res) => {
