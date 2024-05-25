@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateUser from "./CreateUser";
+import './Login.css'
 
 export default function Login({
   setCreateUser,
@@ -43,23 +44,28 @@ function handleLogin(e) {
   }
 
   return (
-    <div>
+    <div className="login-wrap">
+      <div className="wrap">
       <h1>Welcome to Bookly! Sign in below</h1>
-      <form onSubmit={handleLogin}>
+      <p>Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
+      <form onSubmit={handleLogin} className="login-form">
         <input
           type="text"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
+          className="input"
         />
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
+          className="input"
         />
-        <button type="submit">Sign In</button>
+        <button type="submit" className="btn">Sign In</button>
       </form>
-      <button onClick={handleSetCreateUser}>Create Account</button>
+      <button className="btn" onClick={handleSetCreateUser}>Create Account</button>
       {createUser ? <CreateUser /> : null}
+      </div>
     </div>
   );
 }
