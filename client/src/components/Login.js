@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Login({
-  setIsLoggedIn,
   setCreateUser,
   createUser,
   setUser,
 }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
 function handleLogin(e) {
   e.preventDefault();
@@ -24,7 +26,7 @@ function handleLogin(e) {
     .then((res) => res.json())
     .then((data) => {
       if (data && !data.error) {
-        setIsLoggedIn(true);
+        navigate("/home");
         setUser(data);
       } else {
         console.error(data.error);

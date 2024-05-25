@@ -1,31 +1,24 @@
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
-import CreateUser from './components/CreateUser';
 import Login from './components/Login';
 import Homescreen from './components/Homescreen';
 import { useState } from "react";
+import UserBooks from "./pages/UserBooks";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [createUser, setCreateUser] = useState(false);
   const [user, setUser] = useState({});
 
   console.log(user);
 
   return (
-    <div>
-      {isLoggedIn === false ? (
-        <div>
-          <Login setIsLoggedIn={setIsLoggedIn} setCreateUser={setCreateUser} createUser={createUser} setUser={setUser} />
-          {createUser ? (
-            <CreateUser />
-          ) : (
-            <></>
-          )}
-        </div>
-      ) : (
-        <Homescreen user={user}/>
-      )}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/books" element={<UserBooks user={user}/>} />
+        <Route path="/home" element={<Homescreen user={user}/>} />
+        <Route path="/" element={<Login setCreateUser={setCreateUser} createUser={createUser} setUser={setUser} />} />
+      </Routes>
+    </Router>
   );
 }
 

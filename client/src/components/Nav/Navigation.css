@@ -1,0 +1,38 @@
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: #1a1a2e; /* Darker background */
+    color: white;
+    height: 60px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+}
+
+.nav-list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+.nav-link-container {
+    margin: 0 10px;
+    transition: transform 0.3s ease-in-out; /* Add transition for hover effect */
+}
+
+.nav-link-container:hover {
+    transform: scale(1.1); /* Add hover effect */
+}
+
+.nav-link {
+    color: #e0e0e0; /* Lighter color for contrast */
+    text-decoration: none;
+    font-size: 1.1em; /* Larger font size */
+    transition: color 0.3s ease-in-out; /* Add transition for hover effect */
+}
+
+.nav-link:hover {
+    color: #ffffff; /* Change color on hover */
+}
