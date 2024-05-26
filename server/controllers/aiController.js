@@ -9,20 +9,9 @@ exports.ask = async (req, res) => {
     const { prompt, books } = req.body;
     console.log(books);
 
-const formattedBooks = [];
-// books is an array of objects we need to iterate over and extract data from to send to our ai
-
-books.forEach(book => {
-    // console.log(book.book.volumeInfo.title);
-    // console.log(book.book.volumeInfo.authors);
-    // console.log(book.book.volumeInfo.description);
-
-    formattedBooks.push({
-        title: book.book.volumeInfo.title,
-        authors: book.book.volumeInfo.authors,
-        description: book.book.volumeInfo.description
-    });
-});
+    const formattedBooks = books.map(book => {
+        return `Title: ${book.book.volumeInfo.title}, Authors: ${book.book.volumeInfo.authors.join(', ')}, Description: ${book.book.volumeInfo.description}`;
+    }).join('\n\n');
 
 console.log(formattedBooks);
 
@@ -33,12 +22,9 @@ console.log(formattedBooks);
           {
             model: 'gpt-3.5-turbo',
             messages: [
-// send the prompt and books to the AI so that it can view the array of books but also read the prompt
-            //   { role: 'system', content: 'You are a helpful assistant' },
-            //   { role: 'user', content: prompt }
-            { role: 'system', content: 'You are a helpful assistant designed to make book recommendations based off a list we provide you from our user database. When provided with a list you are to strike a conversation with the user about the books they like and help them determine other ones to read' },
-            { role: 'user', content: `Here are the books to make recommendations on. You are to make recommendations for other books based off of these ones ${formattedBooks}` },
-            { role: 'user', content: prompt },
+                { role: 'system', content: 'You are a helpful assistant designed to make book recommendations based on a list provided by the user. When provided with a list, you should engage in a conversation with the user about the books they like and help them determine other ones to read.' },
+                { role: 'user', content: `Here are the books to make recommendations on:\n\n${formattedBooks}` },
+                { role: 'user', content: prompt },
             ],
           },
           {
