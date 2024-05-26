@@ -23,6 +23,7 @@ const addMessage = (newUserMessage, newAiMessage) => {
   if (newAiMessage) {
     combinedMessages.push(newAiMessage);
   }
+  // reverse the order of the messages so that the most recent message is at the bottom
   setMessages(combinedMessages);
 };
 

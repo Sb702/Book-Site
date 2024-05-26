@@ -2,7 +2,7 @@ import './ChatMessages.css';
 
 export default function ChatMessages({ messages }) {
   return (
-    <div>
+    <div className='chat-container'>
       {messages.map((message, index) => (
         <div key={index} className={message.type === 'ai' ? 'ai-message' : 'user-message'}>
           {message.content}
