@@ -8,13 +8,15 @@ export default function ChatInput({
   setAiMessages,
   userMessages,
   setUserMessages,
-  addMessage
+  addMessage, 
+  messages
 }) {
   const [prompt, setPrompt] = useState("");
-  // console.log(userBooks);
-
+  console.log(userBooks);
 function askAI(e) {
   e.preventDefault();
+
+  if(userMessages.length === 0) {
   // addMessage("user", prompt);
   fetch("http://localhost:3000/ai", {
     method: "POST",
@@ -33,6 +35,25 @@ function askAI(e) {
       addMessage({ type: "user", content: prompt }, { type: "ai", content: data.response });
     })
     .catch((err) => console.error(err));
+  } else {
+    fetch("http://localhost:3000/many", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ prompt, books: userBooks, messages }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        // addMessage("ai", data.response);
+        setUserMessages([...userMessages, { type: "user", content: prompt }]);
+        setAiMessages([...aiMessages, { type: "ai", content: data.response }]);
+        // addMessage(newUserMessage = {prompt} , newAiMessage = {data.response});
+        addMessage({ type: "user", content: prompt }, { type: "ai", content: data.response });
+      })
+      .catch((err) => console.error(err));
+  }
 }
 
   return (

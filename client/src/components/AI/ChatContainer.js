@@ -32,7 +32,7 @@ const addMessage = (newUserMessage, newAiMessage) => {
     <div>
       <Navigation />
       <ChatMessages aiMessages={aiMessages} userMessages={userMessages} messages={messages} />
-      <ChatInput user={user} userBooks={userBooks} aiMessages={aiMessages} setAiMessages={setAiMessages} userMessages={userMessages} setUserMessages={setUserMessages} addMessage={addMessage} />
+      <ChatInput user={user} userBooks={userBooks} aiMessages={aiMessages} setAiMessages={setAiMessages} userMessages={userMessages} setUserMessages={setUserMessages} addMessage={addMessage} messages={messages}/>
     </div>
   )
 }

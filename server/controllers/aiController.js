@@ -9,11 +9,14 @@ exports.ask = async (req, res) => {
     const { prompt, books } = req.body;
     console.log(books);
 
-    const formattedBooks = books.map(book => {
-        return `Title: ${book.book.volumeInfo.title}, Authors: ${book.book.volumeInfo.authors.join(', ')}, Description: ${book.book.volumeInfo.description}`;
-    }).join('\n\n');
+const formattedBooks = books.map(book => {
+    const title = book.book.volumeInfo.title;
+    const authors = Array.isArray(book.book.volumeInfo.authors) ? book.book.volumeInfo.authors.join(', ') : 'N/A';
+    const description = book.book.volumeInfo.description;
+    return `Title: ${title}, Authors: ${authors}, Description: ${description}`;
+}).join('\n\n');
 
-console.log(formattedBooks);
+// console.log(formattedBooks);
 
 
     try {
@@ -42,3 +45,51 @@ console.log(formattedBooks);
         res.status(500).json({ error: 'Failed to communicate with OpenAI' });
       }
     };
+
+    exports.askMany = async (req, res) => {
+        const { prompt, books, messages } = req.body;
+
+        const formattedBooks = books.map(book => {
+          const title = book.book.volumeInfo.title;
+          const authors = Array.isArray(book.book.volumeInfo.authors) ? book.book.volumeInfo.authors.join(', ') : 'N/A';
+          const description = book.book.volumeInfo.description;
+          return `Title: ${title}, Authors: ${authors}, Description: ${description}`;
+      }).join('\n\n');
+
+
+        // format the messages so that they are in the correct format for the OpenAI API to understand currently we have an array of objects with a type and content property. We need to convert this into plane text with the user and ai messages separated by a newline character
+        const formattedMessages = messages.map(message => {
+            return `${message.type === 'user' ? 'User' : 'AI'}: ${message.content}`;
+        }).join('\n');
+
+
+
+        console.log(messages);
+
+        try {
+            const response = await axios.post(
+              'https://api.openai.com/v1/chat/completions',
+              {
+                model: 'gpt-3.5-turbo',
+                messages: [
+                    { role: 'system', content: `You are a helpful assistant designed to make book recommendations based on a list provided by the user. When provided with a list, you should engage in a conversation with the user about the books they like and help them determine other ones to read. Here are any previous messages from our past conversion ${formattedMessages}` },
+                    { role: 'user', content: `Here are the books to make recommendations on:\n\n${formattedBooks}` },
+                    { role: 'user', content: prompt },
+                ],
+              },
+              {
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization': `Bearer ${OPENAI_API_KEY}`,
+                },
+              }
+            );
+        
+            const chatResponse = response.data.choices[0].message.content;
+            res.json({ response: chatResponse });
+          }
+          catch (error) {
+            console.error('Error communicating with OpenAI:', error.message);
+            res.status(500).json({ error: 'Failed to communicate with OpenAI' });
+          }
+        }

@@ -16,5 +16,6 @@ router.delete("/delete/:id", bookController.delete);
 router.get("/books/:id", userbookController.getBooks);
 
 router.post("/ai", aiController.ask);
+router.post("/many", aiController.askMany);
 
 module.exports = router;
