@@ -1,0 +1,40 @@
+.chat-input-out-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding-top: 5vh;
+    padding-bottom: 7vh;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+}
+
+.chat-input {
+    width: 80%;
+    padding: 10px;
+    border-radius: 20px;
+    border: 1px solid #ced4da;
+    outline: none;
+    font-size: 1.2em;
+    box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.518);
+}
+
+.chat-submit-btn {
+    background-color: purple;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin-left: 10px;
+    cursor: pointer;
+    box-shadow: 0px 3px 2px rgba(0, 0, 0, 0.518);
+}
+
+.chat-submit-btn:hover {
+    background-color: #6f42c1;
+}
+
+.chat-submit-btn:active {
+    background-color: #6f42c1;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.518);
+}
