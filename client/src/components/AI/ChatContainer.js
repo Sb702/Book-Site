@@ -15,11 +15,13 @@ const [messages, setMessages] = useState([])
 //   // we want to combine the userMessages and aiMessages arrays into one array but we want to keep track of the order of the messages and make it look like a conversation. All of them will be stored in the state called messages
 // };  
 
-const addMessage = () => {
-  let combinedMessages = [];
-  for (let i = 0; i < userMessages.length; i++) {
-    combinedMessages.push(userMessages[i]);
-    combinedMessages.push(aiMessages[i]);
+const addMessage = (newUserMessage, newAiMessage) => {
+  let combinedMessages = [...messages];
+  if (newUserMessage) {
+    combinedMessages.push(newUserMessage);
+  }
+  if (newAiMessage) {
+    combinedMessages.push(newAiMessage);
   }
   setMessages(combinedMessages);
 };

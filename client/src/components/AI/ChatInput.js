@@ -29,7 +29,8 @@ function askAI(e) {
       // addMessage("ai", data.response);
       setUserMessages([...userMessages, { type: "user", content: prompt }]);
       setAiMessages([...aiMessages, { type: "ai", content: data.response }]);
-      addMessage();
+      // addMessage(newUserMessage = {prompt} , newAiMessage = {data.response});
+      addMessage({ type: "user", content: prompt }, { type: "ai", content: data.response });
     })
     .catch((err) => console.error(err));
 }
