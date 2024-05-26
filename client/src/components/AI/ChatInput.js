@@ -1,7 +1,8 @@
 import {useState} from 'react'
 
-export default function ChatInput({ user}) {
+export default function ChatInput({ user, userBooks }) {
   const [prompt, setPrompt] = useState("")
+  console.log(userBooks)
 
   function askAI (e) {
     e.preventDefault()
@@ -10,7 +11,7 @@ export default function ChatInput({ user}) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ prompt })
+      body: JSON.stringify({ prompt, books: userBooks })
     })
       .then(res => res.json())
       .then(data => console.log(data))

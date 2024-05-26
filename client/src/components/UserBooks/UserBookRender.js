@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./UserBookRender.css";
 
-export default function UserBookRender({ user }) {
-  const [userBooks, setUserBooks] = useState([]);
+export default function UserBookRender({ user, userBooks, setUserBooks}) {
   const [update, setUpdate] = useState(false);
   console.log(userBooks);
 
