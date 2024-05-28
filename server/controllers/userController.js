@@ -1,5 +1,6 @@
 const User = require("../models/UserModel");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 exports.test = async (req, res) => {
     res.send("Test successful");
@@ -37,5 +38,11 @@ exports.register = async (req, res) => {
         return res.status(400).json({ error: "Invalid credentials" });
     }
 
-    res.status(200).send(user);
+    // if user is found and password is valid, create a token
+    const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET);
+
+    // return the information including token as JSON and the user
+
+    // res.status(200).send(user);
+    res.json({ token, user });
   }

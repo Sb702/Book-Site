@@ -30,7 +30,7 @@ function handleLogin(e) {
     .then((data) => {
       if (data && !data.error) {
         navigate("/home");
-        setUser(data);
+        setUser(data.user);
         setLoginSuccess(true);
       } else {
         console.error(data.error);
