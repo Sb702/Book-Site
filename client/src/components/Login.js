@@ -46,11 +46,12 @@ function handleLogin(e) {
   }
 
   return (
-    <div className={loginSuccess ? "login-form.fade-out login-wrap" : "login-wrap"}>
-      <div className="wrap">
-      <h1>Welcome to Bookly! Sign in below</h1>
-      <p>Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
+    <div className="login-container">
+      <div className="form-wrapper">
+      <h1 className="form-title">Welcome to Bookly! Sign in below</h1>
+      <p className="form-description">Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
       <form onSubmit={handleLogin} className="login-form">
+        <div className="input-wrapper">
         <input
           type="text"
           placeholder="Email"
@@ -63,6 +64,7 @@ function handleLogin(e) {
           onChange={(e) => setPassword(e.target.value)}
           className="input"
         />
+        </div>
         <button type="submit" className="btn">Sign In</button>
       </form>
       <button className="btn" onClick={handleSetCreateUser}>Create Account</button>

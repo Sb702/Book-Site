@@ -1,4 +1,5 @@
 import React from 'react'
+import './BookSearch.css'
 
 export default function BookSearch({ setBooks }) {
     const handleSearch = async (e) => {
@@ -18,9 +19,9 @@ export default function BookSearch({ setBooks }) {
 
   return (
     <div>
-        <form onSubmit={handleSearch}> 
-            <input type="text" placeholder="Search for a book" />
-            <button type="submit">Search</button>
+        <form onSubmit={handleSearch} className='book-search-wrap'> 
+            <input className='book-search-input' type="text" placeholder="Search for a book" />
+            <button className='book-search-btn' type="submit">Search</button>
         </form>
     </div>
   )
