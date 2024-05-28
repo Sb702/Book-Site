@@ -32,6 +32,8 @@ function handleLogin(e) {
         navigate("/home");
         setUser(data.user);
         setLoginSuccess(true);
+        localStorage.setItem("token", data.token);
+        console.log(localStorage.getItem("token"));
       } else {
         console.error(data.error);
       }

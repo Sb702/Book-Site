@@ -1,13 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navigation from "../Nav/Navigation";
 import ChatInput from "./ChatInput";
 import ChatMessages from "./ChatMessages";
+import { useNavigate } from "react-router-dom";
 
 
 export default function ChatContainer({ user, userBooks }) {
 const [userMessages, setUserMessages] = useState([])
 const [aiMessages, setAiMessages] = useState([])
 const [messages, setMessages] = useState([])
+
+const navigate = useNavigate();
+
+useEffect(() => {
+  fetch("http://localhost:3000/protect", {
+    method: "POST",
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+    },
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error('Not authorized');
+      }
+      return res.json();
+    })
+    .then((data) => {
+      if (data && !data.error) {
+        // console.log(data.user);
+      }
+    })
+    .catch((err) => {
+      // if there is an error we need to navigate to the login screen
+      console.log(err);
+      alert("You are not authorized to access this page.")
+      navigate("/");
+    });
+}, []);
 
 // const addMessage = () => {
 //   console.log(userMessages, aiMessages)

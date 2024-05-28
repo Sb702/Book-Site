@@ -8,6 +8,7 @@ export default function BookSearch({ setBooks }) {
         const search = await fetch('http://localhost:3000/search', {
             method: 'POST',
             headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ searchQuery: e.target[0].value })
