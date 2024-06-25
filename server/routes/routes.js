@@ -13,7 +13,7 @@ router.post("test", userController.test);
 router.post("/protect", authController.protect);
 
 
-router.post("/search", authController.protect, bookController.search);
+router.post("/search", bookController.search);
 router.post("/save", bookController.save);
 router.delete("/delete/:id", bookController.delete);
 
