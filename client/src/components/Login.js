@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CreateUser from "./CreateUser";
-import './Login.css'
+
 
 export default function Login({
   setCreateUser,
@@ -48,12 +48,12 @@ function handleLogin(e) {
   }
 
   return (
-    <div className="login-container">
-      <div className="form-wrapper">
-      <h1 className="form-title">Welcome to Bookly! Sign in below</h1>
-      <p className="form-description">Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
+    <div className="flex justify-center items-center h-screen">
+      <div className="bg-slate-700 p-20 rounded-md">
+      <h1 className="text-4xl">Welcome to Bookly! Sign in below</h1>
+      <p className="text-xl">Your companion for curating a personal reading list with ai based on your favorite previous reads!</p>
       <form onSubmit={handleLogin} className="login-form">
-        <div className="input-wrapper">
+        <div className="flex gap-5 justify-center p-5">
         <input
           type="text"
           placeholder="Email"
@@ -66,11 +66,13 @@ function handleLogin(e) {
           onChange={(e) => setPassword(e.target.value)}
           className="input"
         />
+        <button type="submit" className="btn btn-primary">Sign In</button>
         </div>
-        <button type="submit" className="btn">Sign In</button>
       </form>
-      <button className="btn" onClick={handleSetCreateUser}>Create Account</button>
+      <div className="flex justify-center">
+      <button className="btn btn-primary" onClick={handleSetCreateUser}>Create Account</button>
       {createUser ? <CreateUser /> : null}
+      </div>
       </div>
     </div>
   );
