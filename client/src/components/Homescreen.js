@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import ChatContainer from './AI/ChatContainer'
 import BookContainer from './UserBooks/BookContainer'
 import Navigation from './Nav/Navigation'
-import './Homescreen.css'
 import { useNavigate } from 'react-router-dom'
 
 export default function Homescreen({ user, setUser }) {
@@ -44,10 +43,9 @@ useEffect(() => {
 
   return (
     <div>
-      <Navigation />
-      <h1 className='header'>Welcome to Bookly, {user.userName}!</h1>
+      <Navigation handleLogout={handleLogout}/>
+      <h1 className='text-4xl text-center p-7 text-primary'>Welcome to Bookly, {user.userName}!</h1>
       {/* <ChatContainer /> */}
-      <button onClick={handleLogout}>Logout</button>
       <BookContainer user={user} />
     </div>
   )

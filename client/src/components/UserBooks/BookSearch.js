@@ -1,5 +1,5 @@
 import React from 'react'
-import './BookSearch.css'
+
 
 export default function BookSearch({ setBooks }) {
     const handleSearch = async (e) => {
@@ -20,9 +20,10 @@ export default function BookSearch({ setBooks }) {
 
   return (
     <div>
-        <form onSubmit={handleSearch} className='book-search-wrap'> 
-            <input className='book-search-input' type="text" placeholder="Search for a book" />
-            <button className='book-search-btn' type="submit">Search</button>
+        <form onSubmit={handleSearch} className='flex justify-center gap-5'> 
+            {/* <input className='book-search-input' type="text" placeholder="Search for a book" /> */}
+            <input className='input input-bordered input-primary w-1/2 max-w-xs' type="text" placeholder="Search for a book" />
+            <button className='btn btn-primary'>Search</button>
         </form>
     </div>
   )

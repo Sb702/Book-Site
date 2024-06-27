@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LearnMore from "./LearnMore";
-import "./BookResults.css";
+
 
 export default function BookResults({ books, user, setAddBook, addBook}) {
   const [learnMore, setLearnMore] = useState(false);
@@ -27,27 +27,29 @@ export default function BookResults({ books, user, setAddBook, addBook}) {
   }
 
   return (
-    <div className="book-outer-container">
+    <div className="grid grid-cols-4 p-5 gap-2">
       {Array.isArray(books) &&
         books.map((book) => {
           const thumbnail = book.volumeInfo.imageLinks?.thumbnail || "";
           return (
             // Book Container
-            <div key={book.id} className="book-container">
-              <div className="title-container-book">
-              <h2>{book.volumeInfo.title}</h2>
-              <h3>{book.volumeInfo.authors}</h3>
+            <div key={book.id} className="bg-slate-700 hover:bg-slate-900">
+              <div className="text-center text-lg">
+              <h2 className="text-slate-200">{book.volumeInfo.title}</h2>
+              <h3 className="text-slate-300">{book.volumeInfo.authors}</h3>
               </div>
+              <div className="flex justify-center">
               <img className="main-book-img" src={thumbnail} alt={book.volumeInfo.title} />
+              </div>
               {/* Main Book Buttons */}
-              <div className="main-book-btns">
-              <button className="book-btn" onClick={() => handleLearnMore(book.id)}>
+              <div className="flex justify-around p-3">
+              <button className="btn btn-primary" onClick={() => handleLearnMore(book.id)}>
                 Learn More
               </button>
               {selectedBook === book.id && learnMore ? (
                 <LearnMore book={book.volumeInfo} setLearnMore={setLearnMore} />
               ) : null}
-              <button className="book-btn" onClick={() => handleSaveBook(book)}>quick add</button>
+              <button className="btn btn-primary" onClick={() => handleSaveBook(book)}>quick add</button>
             </div>
             </div>
           );
